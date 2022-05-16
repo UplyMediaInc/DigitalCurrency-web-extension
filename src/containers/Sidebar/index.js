@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Routes, Link } from 'react-router-dom';
+import Buy from '../../views/Buy';
+import Sell from '../../views/Sell';
+import Dashboard from '../../views/Dashboard';
+import Stake from '../../views/Stake';
+import Swap from '../../views/Swap';
+import Receive from '../../views/Receive';
+import Send from '../../views/Send';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -198,9 +205,15 @@ export default function Sidebar() {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        <Typography variant='h1'>
-          Hello
-        </Typography>
+        <Routes>
+          <Route path='/' element={<Dashboard />}/>
+          <Route path='/buy' element={<Buy />}/>
+          <Route path='/sell' element={<Sell />}/>
+          <Route path='/stake' element={<Stake />}/>
+          <Route path='/swap' element={<Swap />}/>
+          <Route path='/send' element={<Send />}/>
+          <Route path='/receive' element={<Receive />}/>
+        </Routes>
       </Main>
     </Box>
   );
