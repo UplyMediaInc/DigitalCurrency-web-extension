@@ -1,11 +1,15 @@
 import React from 'react'
-import { Typography } from '@mui/material'
+import BalanceChart from '../../components/BalanceChart';
+import Holdings from '../../components/Holdings';
+import WatchList from '../../components/WatchList';
 
 function Dashboard() {
   return (
-    <Typography variant='h1'>
-        Dashboard
-    </Typography>
+      <div style={{display:'flex', flexWrap:'wrap'}}>
+        <BalanceChart/>
+        <Holdings />
+        <WatchList />
+      </div>
   )
 }
 
