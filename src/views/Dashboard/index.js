@@ -10,11 +10,13 @@ function Dashboard() {
       <div style={{display:'flex', flexWrap:'wrap'}}>
         <Box
           sx={{
-            backgroundColor: '#6DAFFE',
+            backgroundColor: '#437FC7',
+            color: 'white',
             borderRadius: '16px',
             width:'25%',
             marginLeft: '20%',
             marginBottom:'2%',
+            padding: '1.5%',
             display:'flex',
             flexWrap:'wrap',
             justifyContent:'center',
