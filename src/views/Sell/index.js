@@ -4,7 +4,7 @@ import { Typography } from '@mui/material'
 function Sell() {
   return (
     <Typography variant='h1'>
-        Sell
+        Sell Page
     </Typography>
   )
 }

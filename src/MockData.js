@@ -125,21 +125,21 @@ export const userWatchlistData = [
     id:1,
     symbol: 'USDC',
     name: 'USD Coin',
-    price: 1,
+    price: 1.00,
     icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png',
   },
   {
     id:2,
     symbol: 'DAI',
     name: 'Dai Stablecoin',
-    price: 1,
+    price: 1.00,
     icon: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x6B175474E89094C44Da98b954EedeAC495271d0F/logo.png'
   },
   {
     id:3,
     symbol: 'FRAX',
     name: 'Frax',
-    price: 1,
+    price: 1.00,
     icon: 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x853d955aCEf822Db058eb8505911ED77F175b99e/logo.png'
   },
 ]

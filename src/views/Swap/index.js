@@ -4,7 +4,7 @@ import { Typography } from '@mui/material'
 function Swap() {
   return (
     <Typography variant='h1'>
-        Swap
+        Swap Page
     </Typography>
   )
 }

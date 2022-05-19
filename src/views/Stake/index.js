@@ -4,7 +4,7 @@ import { Typography } from '@mui/material'
 function Stake() {
   return (
     <Typography variant='h1'>
-        Stake
+        Stake Page
     </Typography>
   )
 }

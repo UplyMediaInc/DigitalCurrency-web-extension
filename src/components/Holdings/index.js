@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import { Typography } from '@mui/material';
 import { userHoldingsData, columns } from '../../MockData';
 import { DataGrid } from '@mui/x-data-grid';
 
@@ -11,13 +12,16 @@ const Holdings = () => {
                 borderRadius:'16px',
                 display:'flex',
                 flexWrap:'wrap',
-                height:310,
+                height:400,
                 width:'50%',
                 marginLeft:'12%',
                 marginTop:10,
+                alignContent:'center',
             }}>
                 <Box sx={{marginLeft:5, marginTop:1, marginBottom:1}}>
-                    Current Holdings:
+                    <Typography variant='h6'>
+                        Current Holdings:
+                    </Typography>
                 </Box>
                 <Box 
                     sx={{

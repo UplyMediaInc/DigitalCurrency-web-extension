@@ -14,21 +14,30 @@ const BalanceChart = () => {
                 borderRadius:'16px',
                 display:'flex',
                 justifyContent: 'center',
+                alignItems:'center'
             }}
         >
             <Box 
-                sx={{height:'100%', width:'15%', flexDirection: 'column', marginTop:10}}>
+                sx={{
+                    height:'100%', 
+                    width:'18%', 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    justifyContent:'center', 
+                }}>
                 <Box
-                    sx={{alignSelf:'flex-start', width:'100%',fontSize: 'h5.fontSize'}}>
+                    sx={{ width:'100%',fontSize: 'h5.fontSize'}}>
                     Account Value:
                 </Box>
-                <Box component='span'
-                    sx={{ fontSize: 'h3.fontSize', alignSelf:'flex-start'}}>
-                        ${mockData[mockData.length-1].value}
+                <Box
+                    sx={{ fontSize: 'h4.fontSize', width: '100%'}}>
+                        ${mockData[mockData.length-1].value} USD
                 </Box>
             </Box>
-             <ResponsiveContainer width='80%'>
-                <LineChart data={mockData}
+             <ResponsiveContainer width='80%' height='100%'>
+                <LineChart 
+                    data={mockData}
+                    width={400}
                     margin={{ top: 20, bottom:20, right: 20}}>
                     <XAxis dataKey='name' />
                     <YAxis />

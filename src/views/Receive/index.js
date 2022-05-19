@@ -4,7 +4,7 @@ import { Typography } from '@mui/material'
 function Receive() {
   return (
     <Typography variant='h1'>
-        Receive
+        Receive Page
     </Typography>
   )
 }
