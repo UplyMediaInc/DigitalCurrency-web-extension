@@ -86,7 +86,7 @@ export const columns = [
     headerName: '',
     width:50,
     editable:true,
-    renderCell: (params) => <img src={params.value} height='30' width='30'/>
+    renderCell: (params) => <img alt='Coin Icon' src={params.value} height='30' width='30'/>
   },
   {
     field: 'symbol',
@@ -150,7 +150,7 @@ export const watchlistColumns = [
     headerName:'',
     width:50,
     editable:true,
-    renderCell: (params) => <img src={params.value} height='30' width='30'/>
+    renderCell: (params) => <img alt='Coin Icon' src={params.value} height='30' width='30'/>
   },
   {
     field: 'symbol',

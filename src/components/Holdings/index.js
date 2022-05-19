@@ -7,7 +7,7 @@ import { DataGrid } from '@mui/x-data-grid';
 const Holdings = () => {
     return(
         <Box
-            sx={{backgroundColor: '#6DAFFE',
+            sx={{backgroundColor: '#EDF6FF',
                 boxShadow:20,
                 borderRadius:'16px',
                 display:'flex',
