@@ -80,6 +80,18 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
+const DrawerItem = (props) => {
+  return(
+    <ListItem disablePadding>
+      <ListItemButton>
+        <ListItemIcon>
+          {props.icon}
+        </ListItemIcon>
+          <ListItemText style={{color: 'black'}} primary={props.label} />
+      </ListItemButton>
+    </ListItem>
+  )
+}
 export default function App() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -133,74 +145,25 @@ export default function App() {
         <Divider />
         <List>
           <Link to='/' style={{ color: 'gray', textDecoration: 'none'}}>
-            <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <AccountBalanceWalletIcon />
-                  </ListItemIcon>
-                <ListItemText style={{color: 'black'}} primary='Wallet' />
-              </ListItemButton>
-            </ListItem>
+            <DrawerItem icon={<AccountBalanceWalletIcon />} label='Wallet'/>
           </Link>
           <Link to='/buy' style={{ color: 'gray', textDecoration: 'none'}}>
-            <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <AddIcon />
-                  </ListItemIcon>
-                  <ListItemText style={{color: 'black'}} primary='Buy' />
-                </ListItemButton>
-            </ListItem>
+            <DrawerItem icon={<AddIcon />} label='Buy'/>
           </Link>
           <Link to='/sell' style={{ color: 'gray', textDecoration: 'none'}}>
-            <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                      <RemoveIcon />
-                  </ListItemIcon>
-                  <ListItemText style={{color: 'black'}} primary='Sell' />
-                </ListItemButton>
-            </ListItem>
+            <DrawerItem icon={<RemoveIcon />} label='Sell'/>
           </Link>
           <Link to='/stake' style={{ color: 'gray', textDecoration: 'none'}}>
-            <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                      <TrendingUpIcon />
-                  </ListItemIcon>
-                  <ListItemText style={{color: 'black'}} primary='Stake' />
-                </ListItemButton>
-            </ListItem>
+            <DrawerItem icon={<TrendingUpIcon />} label='Stake'/>
           </Link>
           <Link to='/swap' style={{ color: 'gray', textDecoration: 'none'}}>
-            <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                      <SwapVertIcon />
-                  </ListItemIcon>
-                  <ListItemText style={{color: 'black'}} primary='Swap' />
-                </ListItemButton>
-            </ListItem>
+            <DrawerItem icon={<SwapVertIcon />} label='Swap'/>
           </Link>
           <Link to='/send' style={{ color: 'gray', textDecoration: 'none'}}>
-            <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                      <OutboxIcon />
-                  </ListItemIcon>
-                  <ListItemText style={{color: 'black'}} primary='Send' />
-                </ListItemButton>
-            </ListItem>
+            <DrawerItem icon={<OutboxIcon />} label='Send'/>
           </Link>
           <Link to='/receive' style={{ color: 'gray', textDecoration: 'none'}}>
-            <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                      <PaymentsIcon />
-                  </ListItemIcon>
-                  <ListItemText style={{color: 'black'}} primary='Receive' />
-                </ListItemButton>
-            </ListItem>
+            <DrawerItem icon={<PaymentsIcon />} label='Receive'/>
           </Link>
         </List>
       </Drawer>
