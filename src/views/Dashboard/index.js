@@ -1,37 +1,53 @@
 import React from 'react'
-import { Typography } from '@mui/material';
 import BalanceChart from '../../components/BalanceChart';
-import Box from '@mui/material/Box';
 import Holdings from '../../components/Holdings';
 import WatchList from '../../components/WatchList';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 
 function Dashboard() {
   return (
-      <div style={{display:'flex', flexWrap:'wrap'}}>
-        <Box
-          sx={{
-            backgroundColor: '#437FC7',
-            color: 'white',
-            borderRadius: '16px',
-            width:'25%',
-            marginLeft: '20%',
-            marginBottom:'2%',
-            padding: '1.5%',
-            display:'flex',
-            flexWrap:'wrap',
-            justifyContent:'center',
-            boxShadow:20,
-          }}>
-          <Typography 
-            variant='h3'
-            align='center'>
-              Wallet Dashboard
-          </Typography>
-        </Box>
-        <BalanceChart/>
-        <Holdings />
-        <WatchList />
-      </div>
+    <Container maxWidth="lg" sx={{ mt: 4, mb: 4}}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={8} lg={9}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                  }}
+                >
+                  <BalanceChart/>
+                </Paper>
+              </Grid>
+              <Grid item xs={12} >
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 'fit-content',
+                    width:'fit-content',
+                  }}
+                >
+                  <Holdings />
+                </Paper>
+              </Grid>
+              <Grid item xs={12}>
+                <Paper 
+                  sx={{ 
+                    p: 2, 
+                    display: 'flex', 
+                    flexDirection: 'column',
+                    height: 'fit-content',
+                    width:'fit-content', }}>
+                  <WatchList />
+                </Paper>
+              </Grid>
+            </Grid>
+          </Container>
   )
 }
 

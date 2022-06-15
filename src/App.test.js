@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event'
-import App from './App';
+import MainApp from './MainApp';
 
 const renderWithRouter = (ui, {route = '/'} = {}) => {
   window.history.pushState({}, 'Test page', route)
@@ -13,7 +13,7 @@ const renderWithRouter = (ui, {route = '/'} = {}) => {
 }
 
 test('full dashboard rendering/navigating', async () => {
-  const {user} = renderWithRouter(<App />)
+  const {user} = renderWithRouter(<MainApp />)
   expect(screen.getByText(/Account Value:/i)).toBeInTheDocument()
   expect(screen.getByText(/Wallet DashBoard/i)).toBeInTheDocument()
   expect(screen.getByText(/Current Holdings:/i)).toBeInTheDocument()

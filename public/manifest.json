@@ -4,6 +4,7 @@
   "author": "Gio",
   "version": "1.0.1",
   "description": "Cryptocurrency Wallet",
+  "start_url": ".",
   "icons": {
     "16": "fav16.ico",
     "48": "fav48.ico",

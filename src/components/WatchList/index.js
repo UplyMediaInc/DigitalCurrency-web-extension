@@ -1,49 +1,43 @@
-import Box from '@mui/material/Box';
-import { Typography } from '@mui/material';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import { userWatchlistData, watchlistColumns } from '../../MockData';
-import { DataGrid } from '@mui/x-data-grid';
+import { userWatchlistData } from '../../MockData';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Title from '../Title';
+import React from 'react';
+
 
 function WatchList() {
   return (
-    <Box
-            sx={{backgroundColor: '#EDF6FF',
-                boxShadow:20,
-                borderRadius:'16px',
-                display:'flex',
-                flexWrap:'wrap',
-                height:400,
-                width:'30%',
-                marginLeft:10,
-                marginTop:10,
-            }}>
-              <Box 
-                sx={{
-                  width:'100%',
-                  height: 70,
-                  display:'flex',
-                  justifyContent:'center',
-                  alignItems:'center',
-                  gap: '15px'
-                  }}>
-                    <RemoveRedEyeIcon />
-                    <Typography variant='h5'>
-                      Watchlist
-                    </Typography>
-              </Box>
-              <Box
-                sx={{
-                  width: '100%', 
-                  height:300,
-                  color: 'black'
-                  }}>
-                    <DataGrid 
-                      rows={userWatchlistData}
-                      columns={watchlistColumns}
-                    />
-
-              </Box>
-        </Box>
+    <React.Fragment>
+      <Title>
+        Watchlist
+      </Title>
+      <Table>
+        <TableHead>
+          <TableRow>  
+            <TableCell>Icon</TableCell>
+            <TableCell>Symbol</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Price ($)</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {userWatchlistData.map((data) => {
+            return(
+              <TableRow key={data.id}>
+                <TableCell>{<img alt='Coin' src={data.icon} height='30' width='30' />}</TableCell>
+                <TableCell>{data.symbol}</TableCell>
+                <TableCell>{data.name}</TableCell>
+                <TableCell>{data.price}</TableCell>
+              </TableRow>
+              )
+            })
+          }
+        </TableBody>
+      </Table>
+    </React.Fragment>
   )
 }
 

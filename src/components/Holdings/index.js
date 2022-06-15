@@ -1,41 +1,52 @@
-import Box from '@mui/material/Box';
-import { Typography } from '@mui/material';
-import { userHoldingsData, columns } from '../../MockData';
-import { DataGrid } from '@mui/x-data-grid';
+import * as React from 'react';
+import { userHoldingsData } from '../../MockData';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Title from '../Title';
 
 
 const Holdings = () => {
     return(
-        <Box
-            sx={{backgroundColor: '#EDF6FF',
-                boxShadow:20,
-                borderRadius:'16px',
-                display:'flex',
-                flexWrap:'wrap',
-                height:400,
-                width:'50%',
-                marginLeft:'12%',
-                marginTop:10,
-                alignContent:'center',
-            }}>
-                <Box sx={{marginLeft:5, marginTop:1, marginBottom:1}}>
-                    <Typography variant='h6'>
-                        Current Holdings:
-                    </Typography>
-                </Box>
-                <Box 
-                    sx={{
-                    width:'100%', 
-                    height:270, 
-                    color:'#ffffff', 
-                    display:'flex'}}>
-                    <DataGrid 
-                        rows={userHoldingsData}
-                        columns={columns}
-                        />
-                        
-                </Box>
-        </Box>
+        <React.Fragment>
+            <Title>Assets</Title>
+            <Table size='small'>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>
+                            Icon
+                        </TableCell>
+                        <TableCell>
+                            Asset
+                        </TableCell>
+                        <TableCell>
+                            Price
+                        </TableCell>
+                        <TableCell>
+                            Balance
+                        </TableCell>
+                        <TableCell align='right'>
+                            Value
+                        </TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {userHoldingsData.map((asset) => {
+                        return (
+                        <TableRow key={asset.id}>
+                            <TableCell>{<img alt='Coin Icon' src={asset.icon} height='30' width='30'/>}</TableCell>
+                            <TableCell>{asset.name}</TableCell>
+                            <TableCell>{asset.symbol} Price</TableCell>
+                            <TableCell>{asset.balance}</TableCell>
+                            <TableCell align='right'>{asset.value}</TableCell>
+                        </TableRow>
+                        )
+                    })}
+                </TableBody>
+            </Table>
+        </React.Fragment>
     )
 }
 

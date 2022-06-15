@@ -1,51 +1,26 @@
-import Box from '@mui/material/Box';
+import * as React from 'react';
+import Title from '../Title';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { useTheme } from '@mui/material/styles';
 import { mockData } from '../../MockData';
 
 const BalanceChart = () => {
+    const theme = useTheme();
     return(
-        <Box
-            sx={{
-                width: '75%',
-                height: 500,
-                backgroundColor: '#EDF6FF',
-                marginLeft:'12%',
-                boxShadow:20,
-                borderRadius:'16px',
-                display:'flex',
-                justifyContent: 'center',
-                alignItems:'center'
-            }}
-        >
-            <Box 
-                sx={{
-                    height:'100%', 
-                    width:'18%', 
-                    display: 'flex', 
-                    flexDirection: 'column', 
-                    justifyContent:'center', 
-                }}>
-                <Box
-                    sx={{ width:'100%',fontSize: 'h5.fontSize'}}>
-                    Account Value:
-                </Box>
-                <Box
-                    sx={{ fontSize: 'h4.fontSize', width: '100%'}}>
-                        ${mockData[mockData.length-1].value} USD
-                </Box>
-            </Box>
-             <ResponsiveContainer width='80%' height='100%'>
+        <React.Fragment>
+            <Title>Account</Title>
+             <ResponsiveContainer width='80%' height='70%'>
                 <LineChart 
                     data={mockData}
-                    width={400}
-                    margin={{ top: 20, bottom:20, right: 20}}>
-                    <XAxis dataKey='name' />
-                    <YAxis />
+                    width='100%'
+                    margin={{ top: 20, bottom:0, right: 20, left:20}}>
+                    <XAxis dataKey='name' stroke={theme.palette.text.secondary} style={theme.typography.body2} />
+                    <YAxis stroke={theme.palette.text.secondary} style={theme.typography.body2}/>
                     <Tooltip />
-                    <Line dataKey='value' stroke='#000000'/>
+                    <Line isAnimationActive={false} dataKey='value' dot={false} stroke={theme.palette.primary.main}/>
                 </LineChart>   
             </ResponsiveContainer> 
-        </Box>
+        </React.Fragment>
     )
 }
 

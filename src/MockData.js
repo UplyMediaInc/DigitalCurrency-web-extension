@@ -55,27 +55,24 @@ export const userHoldingsData = [
     id:1,
     symbol: 'WBTC',
     name: 'Wrapped Bitcoin',
-    initalValue: 100,
-    currentValue: 500,
-    amount: .017,
+    value: 500,
+    balance: .017,
     icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/3717.png'
   },
   {
     id:2,
     symbol: 'ETH',
     name: 'Ethereum',
-    initalValue:50,
-    currentValue: 200,
-    amount: .24,
+    value: 200,
+    balance: .24,
     icon: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png'
   },
   {
     id:3,
     symbol: 'USDT',
     name:'Tether',
-    initalValue: 300,
-    currentValue: 300,
-    amount: 300,
+    value: 300,
+    balance: 300,
     icon:'https://s2.coinmarketcap.com/static/img/coins/64x64/825.png'
   }
 ]
@@ -101,19 +98,13 @@ export const columns = [
     editable: false,
   },
   {
-    field:'amount',
+    field:'balance',
     headerName: 'Amount',
     width: 110,
     editable:false,
   },
   {
-    field:'initalValue',
-    headerName: 'Initial Value ($)',
-    width: 110,
-    editable:false,
-  },
-  {
-    field:'currentValue',
+    field:'value',
     headerName: 'Current Value ($)',
     width: 130,
     editable:false,
