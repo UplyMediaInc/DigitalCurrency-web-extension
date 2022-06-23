@@ -12,6 +12,23 @@ Fix auth
 Build out the rest of the pages
 
 
+## How to run as chrome extension ##
+
+Run "npm run build"
+
+Open up your chrome browser and navigate to your manage extensions page.
+
+Make sure developer mode is on
+
+Click Load Unpacked
+
+Navigate to the project directory 
+
+Select the build folder
+
+Chrome extension should be available and can be pinned
+
+
 
 ## Available Scripts
 
@@ -40,21 +57,6 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## How to run as chrome extension
-
-Run "npm run build"
-
-Open up your chrome browser and navigate to your manage extensions page.
-
-Make sure developer mode is on
-
-Click Load Unpacked
-
-Navigate to the project directory 
-
-Select the build folder
-
-Chrome extension should be available and can be pinned
 
 
 
