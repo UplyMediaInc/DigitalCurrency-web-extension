@@ -1,6 +1,8 @@
 # Getting Started
 
 ***WIP***
+
+
 This is the frontend for the DigitalCurrency.Crypto wallet web extension.
 
 
@@ -37,9 +39,13 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ## How to run as chrome extension
 
 Run "npm run build"
+
 Open up your chrome browser and navigate to your manage extensions page.
+
 Make sure developer mode is on
+
 Click Load Unpacked, navigate to the project directory and select the build folder
+
 Chrome extension should be available and can be pinned
 
 
