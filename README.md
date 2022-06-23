@@ -7,9 +7,14 @@ This is the frontend for the DigitalCurrency.Crypto wallet web extension.
 
 **TODO**
 
-Fix auth
+Fix auth and registration
 
 Build out the rest of the pages
+
+Integrate backend
+
+Replace MockAPI with API that fetches real data (user info, asset info)
+
 
 
 ## How to run as chrome extension ##
