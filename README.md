@@ -1,6 +1,11 @@
-# Getting Started with Create React App
+# Getting Started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+***WIP***
+This is the frontend for the DigitalCurrency.Crypto wallet web extension.
+
+
+
+
 
 ## Available Scripts
 
@@ -28,6 +33,16 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## How to run as chrome extension
+
+Run "npm run build"
+Open up your chrome browser and navigate to your manage extensions page.
+Make sure developer mode is on
+Click Load Unpacked, navigate to the project directory and select the build folder
+Chrome extension should be available and can be pinned
+
+
 
 ### `npm run eject`
 
