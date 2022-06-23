@@ -5,7 +5,11 @@
 
 This is the frontend for the DigitalCurrency.Crypto wallet web extension.
 
+**TODO**
 
+Fix auth
+
+Build out the rest of the pages
 
 
 
