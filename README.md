@@ -44,7 +44,11 @@ Open up your chrome browser and navigate to your manage extensions page.
 
 Make sure developer mode is on
 
-Click Load Unpacked, navigate to the project directory and select the build folder
+Click Load Unpacked
+
+Navigate to the project directory 
+
+Select the build folder
 
 Chrome extension should be available and can be pinned
 
