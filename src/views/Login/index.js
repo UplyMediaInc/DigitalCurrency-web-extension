@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Navigate } from 'react-router-dom';
+import { Link as NavLink } from 'react-router-dom';
+import { useMoralis } from "react-moralis";
 
 function Copyright(props) {
     return (
@@ -29,21 +31,34 @@ function Copyright(props) {
 
 function Login() {
     const auth = useAuth();
-    const [email, setEmail] = React.useState();
-    const [password, setPassword] = React.useState();
-    const handleSubmit = async(event) => {
-        event.preventDefault();
-        await auth.login(email, password);
+    const [email, setEmail] = React.useState("");
+    const { authenticate, isAuthenticating, authError} = useMoralis();
+
+    const handleSubmit = async(e) => {
+      e.preventDefault()
+      await authenticate({
+        provider: "magicLink",
+        email: email,
+        apiKey: "pk_live_15E7BD5FCE6EB84A",
+        network: "rinkby",
+      })
+      .then((user) => {
+        console.log(user)
+        auth.login(user);
+      })
+      .catch((error) => {
+        console.log(error)
+      })
       };
   return (
     <div>
       {auth.user && (
         <Navigate to="/" replace={true}/>
       )}
-        <Container component="main" maxWidth="xs" >
+        <Container component="main" maxWidth="xs" sx={{width: '500px'}} >
           <Box
             sx={{
-              marginTop: 8,
+              marginTop: 7,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -56,6 +71,8 @@ function Login() {
               Sign in
             </Typography>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+              {isAuthenticating && <p>Authenticating</p>}
+              {authError && <p>{JSON.stringify(authError.message)}</p>}
               <TextField
                 margin="normal"
                 required
@@ -66,17 +83,6 @@ function Login() {
                 autoComplete="email"
                 autoFocus
                 onChange={e => setEmail(e.target.value)}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={e => setPassword(e.target.value)}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -97,9 +103,9 @@ function Login() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
+                    <Link component={NavLink} to='/register' variant="body2">
+                      {"Don't have an account? Sign Up"}
+                    </Link>
                 </Grid>
               </Grid>
             </Box>

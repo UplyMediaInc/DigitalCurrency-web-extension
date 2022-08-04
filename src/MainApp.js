@@ -1,96 +1,35 @@
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import { styled, useTheme } from '@mui/material/styles';
+import { useMoralis } from 'react-moralis';
 import CssBaseline from '@mui/material/CssBaseline';
-import MuiDrawer from '@mui/material/Drawer';
-import MuiAppBar from '@mui/material/AppBar';
+import Drawer from '@mui/material/Drawer';
+import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 import ListItemText from '@mui/material/ListItemText';
 import AddIcon from '@mui/icons-material/Add';
+import Tooltip from '@mui/material/Tooltip';
 import RemoveIcon from '@mui/icons-material/Remove';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import OutboxIcon from '@mui/icons-material/Outbox';
-
+import ArticleIcon from '@mui/icons-material/Article';
+import logo from './DigitalCurrencyLogo.png';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
 
 export const drawerWidth = 180;
-
-const openedMixin = (theme) => ({
-  width: drawerWidth,
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflowX: 'hidden',
-});
-
-const closedMixin = (theme) => ({
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
-  },
-});
-
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme, open }) => ({
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-    boxSizing: 'border-box',
-    ...(open && {
-      ...openedMixin(theme),
-      '& .MuiDrawer-paper': openedMixin(theme),
-    }),
-    ...(!open && {
-      ...closedMixin(theme),
-      '& .MuiDrawer-paper': closedMixin(theme),
-    }),
-  }),
-);
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['margin', 'width'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
-}));
 
 const DrawerItem = (props) => {
   return(
@@ -104,48 +43,25 @@ const DrawerItem = (props) => {
     </ListItem>
   )
 }
-export default function MainApp() {
-  const theme = useTheme();
+export default function MainApp(props) {
+  const { user, logout } = useMoralis()
+  const { window } = props;
   const [open, setOpen] = useState(false);
+  const [anchor, setAnchor] = useState(null)
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  const handleDrawerToggle = () => {
+    setOpen(!open);
   };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
-  return (
-    <Box sx={{display:'flex'}}>
-      <CssBaseline>
-        <AppBar style={{backgroundColor: '#437FC7'}} position="fixed" open={open}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={{ mr: 2, ...(open && { display: 'none' }) }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              DigitalCurrency.Crypto Wallet
-            </Typography>
-
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          variant="permanent"
-          open={open}
-        >
-          <DrawerHeader>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-            </IconButton>
-          </DrawerHeader>
-          <Divider />
+  const handleMenu = (event) => {
+    setAnchor(event.currentTarget);
+  }
+  const handleClose = () => {
+    setAnchor(null);
+  }
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{textAlign: 'center'}}>
+      <img src={logo} height={100} width={100}/>
+      <Divider />
           <List>
             <Link to='/' style={{ color: 'gray', textDecoration: 'none'}}>
               <DrawerItem icon={<AccountBalanceWalletIcon />} label='Wallet'/>
@@ -168,8 +84,85 @@ export default function MainApp() {
             <Link to='/receive' style={{ color: 'gray', textDecoration: 'none'}}>
               <DrawerItem icon={<PaymentsIcon />} label='Receive'/>
             </Link>
+            <Link to='/whitepaper' style={{ color: 'gray', textDecoration: 'none'}}>
+              <DrawerItem icon={<ArticleIcon />} label='Whitepaper'/>
+            </Link>
           </List>
+    </Box>
+  )
+  const container = window !== undefined ? () => window().document.body : undefined;
+user && console.log(user)
+  return (
+    <Box sx={{display:'flex'}}>
+      <CssBaseline>
+        <AppBar style={{backgroundColor: '#437FC7'}} component='nav'>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerToggle}
+              edge="start"
+              sx={{ mr: 2, ...(open && { display: 'none' }) }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Box sx={{flexGrow: 1}}>
+              <Typography variant="h6" noWrap component="div">
+                DigitalCurrency
+              </Typography>
+            </Box>
+            {user && <div>
+              <Tooltip title='Open settings'>
+                <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={handleMenu}
+                    color="inherit"
+                  >
+                    <AccountCircle />
+                  </IconButton>
+              </Tooltip>
+              <Menu
+                  id="menu-appbar"
+                  anchorEl={anchor}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchor)}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={handleClose}>My account</MenuItem>
+                  <MenuItem onClick={logout}>Log Out</MenuItem>
+                </Menu>
+              </div>}
+          </Toolbar>
+        </AppBar>
+        <Box component="nav">
+        <Drawer
+          container={container}
+          variant="temporary"
+          open={open}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          }}
+        >
+          {drawer}
         </Drawer>
+      </Box>
         <Box 
           component="main" 
           sx={{ 
@@ -177,8 +170,8 @@ export default function MainApp() {
             height:'100%', 
             backgroundColor:(theme) => theme.palette.grey[100], 
           }}>
-          <DrawerHeader />
-          <Outlet />
+            <Toolbar/>
+              <Outlet />
         </Box>
       </CssBaseline>
     </Box>
