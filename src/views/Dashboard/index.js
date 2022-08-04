@@ -1,5 +1,4 @@
 import React from 'react'
-import BalanceChart from '../../components/BalanceChart';
 import Holdings from '../../components/Holdings';
 import WatchList from '../../components/WatchList';
 import Container from '@mui/material/Container';
@@ -10,7 +9,7 @@ function Dashboard() {
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4}}>
             <Grid container spacing={3}>
-              <Grid item xs={12} md={8} lg={9}>
+              {/*<Grid item xs={12} md={8} lg={9}>
                 <Paper
                   sx={{
                     p: 2,
@@ -21,7 +20,7 @@ function Dashboard() {
                 >
                   <BalanceChart/>
                 </Paper>
-              </Grid>
+              </Grid>*/}
               <Grid item xs={12} >
                 <Paper
                   sx={{

@@ -11,6 +11,10 @@ import Receive from './views/Receive';
 import AuthProvider from './auth/AuthProvider';
 import RequireAuth from './auth/RequireAuth';
 import Login from './views/Login';
+import Register from './views/Register'
+import Whitepaper from './views/Whitepaper';
+import ComingSoon from './views/ComingSoon';
+
 function App() {
   return (
     <AuthProvider>
@@ -51,7 +55,10 @@ function App() {
                                            <Receive /> 
                                         </RequireAuth>
                                       }/>
+          <Route path='/comingsoon' element={<ComingSoon/>}/>
           <Route path='/login' element={<Login />}/>
+          <Route path='/register' element={<Register />}/>
+          <Route path='/whitepaper' element={<Whitepaper/>}/>
         </Route>
       </Routes>
     </AuthProvider>    

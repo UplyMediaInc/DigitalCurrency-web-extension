@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from './AuthProvider';
+//import { useAuth } from './AuthProvider';
+import { useMoralis } from 'react-moralis';
 
 const RequireAuth = ({ children }) => {
-    const auth = useAuth();
-
-    if(!auth.user){
-        return <Navigate to='/login' replace={true}/>
+    //const auth = useAuth();
+    const { isAuthenticated } = useMoralis()
+    if(!isAuthenticated){
+        return <Navigate to='/comingsoon' replace={true}/>
     }
 
     return children;
