@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useAuth } from '../../auth/AuthProvider'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -30,9 +29,8 @@ function Copyright(props) {
   
 
 function Login() {
-    const auth = useAuth();
     const [email, setEmail] = React.useState("");
-    const { authenticate, isAuthenticating, authError} = useMoralis();
+    const { authenticate, isAuthenticating, authError, user} = useMoralis();
 
     const handleSubmit = async(e) => {
       e.preventDefault()
@@ -44,15 +42,14 @@ function Login() {
       })
       .then((user) => {
         console.log(user)
-        auth.login(user);
       })
       .catch((error) => {
         console.log(error)
       })
-      };
+    };
   return (
     <div>
-      {auth.user && (
+      {user && (
         <Navigate to="/" replace={true}/>
       )}
         <Container component="main" maxWidth="xs" sx={{width: '500px'}} >
@@ -68,7 +65,7 @@ function Login() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Sign in with mnemonic phrase
             </Typography>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
               {isAuthenticating && <p>Authenticating</p>}
@@ -78,7 +75,7 @@ function Login() {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Mnemonic Phrase"
                 name="email"
                 autoComplete="email"
                 autoFocus

@@ -5,8 +5,8 @@ import { useMoralis } from 'react-moralis';
 import { Navigate } from 'react-router-dom';
 
 function ComingSoon() {
-  const { isAuthenticated } = useMoralis()
-  if(isAuthenticated){
+  const { isAuthenticated, user } = useMoralis()
+  if(user){
     return <Navigate to="/" replace={true} />
   }
   return (

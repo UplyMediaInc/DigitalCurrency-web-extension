@@ -8,16 +8,15 @@ import Dashboard from './views/Dashboard';
 import Stake from './views/Stake';
 import Swap from './views/Swap';
 import Receive from './views/Receive';
-import AuthProvider from './auth/AuthProvider';
 import RequireAuth from './auth/RequireAuth';
 import Login from './views/Login';
+import Onboarding from './views/Onboarding';
 import Register from './views/Register'
 import Whitepaper from './views/Whitepaper';
 import ComingSoon from './views/ComingSoon';
 
 function App() {
   return (
-    <AuthProvider>
       <Routes>
         <Route element={<MainApp />}>
           <Route path="/" element={
@@ -57,11 +56,11 @@ function App() {
                                       }/>
           <Route path='/comingsoon' element={<ComingSoon/>}/>
           <Route path='/login' element={<Login />}/>
+          <Route path='/onboarding' element={<Onboarding/>}/>
           <Route path='/register' element={<Register />}/>
           <Route path='/whitepaper' element={<Whitepaper/>}/>
         </Route>
       </Routes>
-    </AuthProvider>    
   )
 }
 
