@@ -14,6 +14,7 @@ import Onboarding from './views/Onboarding';
 import Register from './views/Register'
 import Whitepaper from './views/Whitepaper';
 import ComingSoon from './views/ComingSoon';
+import RecoveryPhrase from './views/RecoveryPhrase';
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
           <Route path='/onboarding' element={<Onboarding/>}/>
           <Route path='/register' element={<Register />}/>
           <Route path='/whitepaper' element={<Whitepaper/>}/>
+          <Route path='/recoveryphrase' element={<RecoveryPhrase/>}/>
         </Route>
       </Routes>
   )
