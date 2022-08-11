@@ -1,4 +1,4 @@
-import { useMoralis } from 'react-moralis';
+import { useMoralis, useMoralisCloudFunction } from 'react-moralis';
 import * as React from 'react';
 import { ethers } from "ethers";
 import { useNavigate } from 'react-router-dom';
@@ -15,44 +15,55 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+
 const theme = createTheme();
 
 function Onboarding() {
     const navigate = useNavigate();
     const {Moralis} = useMoralis();
-    const mnemonicText = ["lobster","extra", "toddler", "front", "educate", "this", "mean", "fade",
-     "weekend", "under", "tent", "below", "eager", "lonely", "brief", "dirt", "patient", "car"];
-     const newUser = new Moralis.User();
-     const [username, setUsername] = React.useState();
+    class NewUser extends Moralis.User{
+      constructor(attributes){
+        super(attributes)
+      }
+    }
+    Moralis.Object.registerSubclass("_User", NewUser);
+    const newUser = new NewUser;
+     const [username, setUsername] = React.useState("");
      const [taken, setTaken] = React.useState();
-
+     const { fetch } = useMoralisCloudFunction("getUser", { username: username})
+    
      React.useEffect(() => {
       setTaken(false);
      },[username])
 
-     const createUser = async() => {
-      const params = { username: username };
-      const user = await Moralis.Cloud.run("getUser", params);
+     const createUser = async(e) => {
+      e.preventDefault();
       if(username !== ""){
+        const user = fetch({ onSuccess: (data) => {return data}})
         if(!user.length > 0){
-        const recoveryPhrase = shuffle(mnemonicText).join(" ");
-        const newAccount = ethers.Wallet.fromMnemonic(recoveryPhrase);
-        const ethAddress = newAccount.address;
-        const encryptedJson = await newAccount.encrypt(recoveryPhrase);
-
-        newUser.set('username', username);
-        newUser.set('password', recoveryPhrase);
-        newUser.set('recoveryPhrase', recoveryPhrase);
-        newUser.set("ethAddress", ethAddress)
-        newUser.set("encryptedJson", encryptedJson);
-        nextPage();
-      }else{
-        setTaken(true);
-        }
+          const newAccount = ethers.Wallet.createRandom();
+          const ethAddress = newAccount.address;
+          const recoveryPhrase = newAccount.mnemonic.phrase;
+          console.log(recoveryPhrase);
+          const encryptedJson = await newAccount.encrypt(recoveryPhrase);
+          newUser.setUsername(username);
+          newUser.setPassword(recoveryPhrase);
+          newUser.signUp().then((user) => {
+            user.set('recoveryPhrase', recoveryPhrase);
+            user.set("ethAddress", ethAddress)
+            user.set("encryptedJson", encryptedJson);
+            return user.save();
+          });
+          console.log(username)
+          //
+          //
+          //
+          console.log('here')
+          navigate("/recoveryphrase", {replace: true, state:{password: recoveryPhrase}})
+        }else{
+          setTaken(true);
+          }
       }
-    }
-    const nextPage = () => {
-      return navigate("/recoveryphrase", {replace: true})
     }
     const shuffle = (array) => {
       let currentIndex = array.length;
@@ -94,7 +105,7 @@ function Onboarding() {
                     label="Username"
                     name="username"
                     autoFocus
-                    onChange={(e) => setUsername(e)}
+                    onChange={(e) => setUsername(e.target.value)}
                 />
             <Button
               type="submit"
@@ -104,7 +115,7 @@ function Onboarding() {
               onClick={createUser}
             >
               Create new wallet
-            </Button>
+            </Button >
             <Grid container justifyContent="center">
               <Grid item>
                 <Link component={NavLink} to='/login' variant="body2">
