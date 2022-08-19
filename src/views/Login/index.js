@@ -29,19 +29,16 @@ function Copyright(props) {
   
 
 function Login() {
-    const [email, setEmail] = React.useState("");
-    const { authenticate, isAuthenticating, authError, user} = useMoralis();
+    const [username, setUsername] = React.useState("");
+    const [password, setPassword] = React.useState("");
+    const { authenticate, isAuthenticating, authError, isAuthenticated, Moralis} = useMoralis();
 
     const handleSubmit = async(e) => {
       e.preventDefault()
-      await authenticate({
-        provider: "magicLink",
-        email: email,
-        apiKey: "pk_live_15E7BD5FCE6EB84A",
-        network: "rinkby",
-      })
+      await Moralis.User.logIn(username, password)
       .then((user) => {
         console.log(user)
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error)
@@ -49,7 +46,7 @@ function Login() {
     };
   return (
     <div>
-      {user && (
+      {isAuthenticated && (
         <Navigate to="/" replace={true}/>
       )}
         <Container component="main" maxWidth="xs" sx={{width: '500px'}} >
@@ -65,7 +62,7 @@ function Login() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in with mnemonic phrase
+              Sign in
             </Typography>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
               {isAuthenticating && <p>Authenticating</p>}
@@ -74,12 +71,23 @@ function Login() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Mnemonic Phrase"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
                 autoFocus
-                onChange={e => setEmail(e.target.value)}
+                onChange={e => setUsername(e.target.value)}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="password"
+                label="Password"
+                name="password"
+                autoFocus
+                type='password'
+                onChange={e => setPassword(e.target.value)}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}

@@ -21,14 +21,9 @@ const theme = createTheme();
 function Onboarding() {
     const navigate = useNavigate();
     const {Moralis} = useMoralis();
-    class NewUser extends Moralis.User{
-      constructor(attributes){
-        super(attributes)
-      }
-    }
-    Moralis.Object.registerSubclass("_User", NewUser);
-    const newUser = new NewUser;
+    const newUser = new Moralis.User();
      const [username, setUsername] = React.useState("");
+     const [password, setPassword] = React.useState("")
      const [taken, setTaken] = React.useState();
      const { fetch } = useMoralisCloudFunction("getUser", { username: username})
     
@@ -38,7 +33,7 @@ function Onboarding() {
 
      const createUser = async(e) => {
       e.preventDefault();
-      if(username !== ""){
+      if(username !== "" && password !== ""){
         const user = fetch({ onSuccess: (data) => {return data}})
         if(!user.length > 0){
           const newAccount = ethers.Wallet.createRandom();
@@ -47,37 +42,20 @@ function Onboarding() {
           console.log(recoveryPhrase);
           const encryptedJson = await newAccount.encrypt(recoveryPhrase);
           newUser.setUsername(username);
-          newUser.setPassword(recoveryPhrase);
+          newUser.setPassword(password);
           newUser.signUp().then((user) => {
-            user.set('recoveryPhrase', recoveryPhrase);
             user.set("ethAddress", ethAddress)
             user.set("encryptedJson", encryptedJson);
             return user.save();
           });
           console.log(username)
-          //
-          //
-          //
           console.log('here')
-          navigate("/recoveryphrase", {replace: true, state:{password: recoveryPhrase}})
+          navigate("/recoveryphrase", {replace: true, state:{phrase: recoveryPhrase}})
         }else{
           setTaken(true);
           }
       }
     }
-    const shuffle = (array) => {
-      let currentIndex = array.length;
-      let randomIndex;
-  
-      while (currentIndex != 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-        [array[currentIndex], array[randomIndex]] = [
-          array[randomIndex], array[currentIndex]];
-      }
-      return array;
-    }
-
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -106,6 +84,17 @@ function Onboarding() {
                     name="username"
                     autoFocus
                     onChange={(e) => setUsername(e.target.value)}
+                />
+            <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="password"
+                    label="Password"
+                    type='password'
+                    name="password"
+                    autoFocus
+                    onChange={(e) => setPassword(e.target.value)}
                 />
             <Button
               type="submit"
