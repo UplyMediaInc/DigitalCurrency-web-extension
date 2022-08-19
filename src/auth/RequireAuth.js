@@ -5,7 +5,7 @@ import { useMoralis } from 'react-moralis';
 
 const RequireAuth = ({ children }) => {
     //const auth = useAuth();
-    const { isAuthenticated } = useMoralis()
+    const { isAuthenticated, user } = useMoralis()
     if(!isAuthenticated){
         return <Navigate to='/comingsoon' replace={true}/>
     }
